@@ -97,6 +97,8 @@ func getTimestamp(si protocol.SignerInfo, opts x509.VerifyOptions) (timestamp.In
 		return timestamp.Info{}, protocol.ErrUnsupported
 	}
 
+	opts.CurrentTime = tsti.GenTime
+
 	// verify timestamp signature and certificate chain..
 	if _, err = tst.Verify(opts); err != nil {
 		return timestamp.Info{}, err
